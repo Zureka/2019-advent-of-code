@@ -23,6 +23,24 @@ RSpec.describe FuelCalculator do
     end
   end
 
+  context "#fuel_for_mass_with_fuel" do
+    it "returns 2 for a mass of 12" do
+      expect(@subject.fuel_for_mass_with_fuel(12)).to eq(2)
+    end
+
+    it "returns 2 for a mass of 14" do
+      expect(@subject.fuel_for_mass_with_fuel(14)).to eq(2)
+    end
+
+    it "returns 966 for a mass of 1969" do
+      expect(@subject.fuel_for_mass_with_fuel(1969)).to eq(966)
+    end
+
+    it "returns 50346 for a mass of 100756" do
+      expect(@subject.fuel_for_mass_with_fuel(100756)).to eq(50346)
+    end
+  end
+
   context "#sum_of_fuel" do
     it "returns 0 if no mass is given" do
       expect(@subject.sum_of_fuel([])).to eq(0)
