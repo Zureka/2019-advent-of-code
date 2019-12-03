@@ -48,14 +48,33 @@ def execute_intcodes(intcodes, list)
   list
 end
 
-File.open("input.txt") do |file|
-  result = []
-  file.each do |line|
-    list = line.split(",").map(&:to_i)
-    list_of_commands = process_list(list)
-    intcodes = create_intcodes(list_of_commands)
-    result = execute_intcodes(intcodes, list)
-  end
+def process_file(noun, verb)
+  File.open("input.txt") do |file|
+    result = []
+    file.each do |line|
+      list = line.split(",").map(&:to_i)
 
-  puts "The answer is: #{result[0]}"
+      list[1] = noun
+      list[2] = verb
+
+      list_of_commands = process_list(list)
+      intcodes = create_intcodes(list_of_commands)
+      result = execute_intcodes(intcodes, list)
+    end
+
+    if result[0] == 19690720
+      puts "I found the result!"
+      puts "Noun: #{noun}"
+      puts "Verb: #{verb}"
+      puts "Answer (100 * noun + verb): #{100 * noun + verb}"
+    end
+  end
+end
+
+options = (0..99).to_a
+
+for noun in options do
+  for verb in options do
+    process_file(noun, verb)
+  end
 end
